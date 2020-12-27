@@ -55,29 +55,7 @@ namespace CoinbaseBot
       }
       catch (Exception erEx)
       {
-        //send email about failure
-        string emailBody = erEx.Message;
-        logger.Error(erEx.Message);
-
-        if (erEx.InnerException != null)
-        {
-          logger.Error(erEx.InnerException.ToString());
-          emailBody += "<br /><br />" + erEx.InnerException.ToString();
-        }
-
-        if (erEx.StackTrace != null)
-        {
-          logger.Error(erEx.StackTrace);
-          emailBody += "<br /><br />" + erEx.StackTrace;
-        }
-
-        if (erEx.Source != null)
-        {
-          logger.Error(erEx.Source);
-          emailBody += "<br /><br />" + erEx.Source;
-        }
-
-        EmailHelper.SendEmail(options.Value.SmtpEmail, options.Value.SmtpPassword, options.Value.SmtpEmail, "CoinbaseBot Error Message", emailBody, options.Value.SmtpHost, options.Value.SmtpPort);
+        HandleError(options, erEx);
       }
 
 
@@ -194,28 +172,7 @@ namespace CoinbaseBot
       }
       catch(Exception erEx)
       {
-        string emailBody = erEx.Message;
-        logger.Error(erEx.Message);
-
-        if (erEx.InnerException != null)
-        {
-          logger.Error(erEx.InnerException.ToString());
-          emailBody += "<br /><br />" + erEx.InnerException.ToString();
-        }
-
-        if (erEx.StackTrace != null)
-        {
-          logger.Error(erEx.StackTrace);
-          emailBody += "<br /><br />" + erEx.StackTrace;
-        }
-
-        if (erEx.Source != null)
-        {
-          logger.Error(erEx.Source);
-          emailBody += "<br /><br />" + erEx.Source;
-        }
-
-        EmailHelper.SendEmail(options.Value.SmtpEmail, options.Value.SmtpPassword, options.Value.SmtpEmail, "CoinbaseBot Error Message", emailBody, options.Value.SmtpHost, options.Value.SmtpPort);
+        HandleError(options, erEx);
       }
     }
 
@@ -246,31 +203,36 @@ namespace CoinbaseBot
       }
       catch (Exception erEx)
       {
-        string emailBody = erEx.Message;
-        logger.Error(erEx.Message);
-
-        if (erEx.InnerException != null)
-        {
-          logger.Error(erEx.InnerException.ToString());
-          emailBody += "<br /><br />" + erEx.InnerException.ToString();
-        }
-
-        if (erEx.StackTrace != null)
-        {
-          logger.Error(erEx.StackTrace);
-          emailBody += "<br /><br />" + erEx.StackTrace;
-        }
-
-        if (erEx.Source != null)
-        {
-          logger.Error(erEx.Source);
-          emailBody += "<br /><br />" + erEx.Source;
-        }
-
-        EmailHelper.SendEmail(options.Value.SmtpEmail, options.Value.SmtpPassword, options.Value.SmtpEmail, "CoinbaseBot Error Message", emailBody, options.Value.SmtpHost, options.Value.SmtpPort);
+        HandleError(options, erEx);
       }
 
 
+    }
+
+    static void HandleError(IOptions<SecretKeys> options, Exception erEx)
+    {
+      string emailBody = erEx.Message;
+      logger.Error(erEx.Message);
+
+      if (erEx.InnerException != null)
+      {
+        logger.Error(erEx.InnerException.ToString());
+        emailBody += "<br /><br />" + erEx.InnerException.ToString();
+      }
+
+      if (erEx.StackTrace != null)
+      {
+        logger.Error(erEx.StackTrace);
+        emailBody += "<br /><br />" + erEx.StackTrace;
+      }
+
+      if (erEx.Source != null)
+      {
+        logger.Error(erEx.Source);
+        emailBody += "<br /><br />" + erEx.Source;
+      }
+
+      EmailHelper.SendEmail(options.Value.SmtpEmail, options.Value.SmtpPassword, options.Value.SmtpEmail, "CoinbaseBot Error Message", emailBody, options.Value.SmtpHost, options.Value.SmtpPort);
     }
 
 
