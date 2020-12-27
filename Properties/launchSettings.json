@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CoinbaseBot": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "NETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
