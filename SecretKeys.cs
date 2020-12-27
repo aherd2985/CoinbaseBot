@@ -6,6 +6,8 @@
     public string CoinbaseApiSecret { get; set; }
     public string SmtpEmail { get; set; }
     public string SmtpPassword { get; set; }
+    public string SmtpHost { get; set; }
+    public int SmtpPort { get; set; }
     public string FiatAddress { get; set; }
     public string BANDAddress { get; set; }
     public string BTCAddress { get; set; }
